@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 淺灰背景 -->
+  <rect width="100%" height="100%" fill="#dcdcdc" />
+
+  <!-- 左側幾何圖形 -->
+  <polygon points="60,100 100,140 60,180 20,140" fill="#bbbbbb" opacity="0.4"/>
+  <rect x="40" y="300" width="40" height="40" fill="#aaaaaa" opacity="0.3" rx="5"/>
+  <circle cx="80" cy="480" r="25" fill="#999999" opacity="0.3"/>
+
+  <!-- 右側幾何圖形 -->
+  <polygon points="740,100 780,140 740,180 700,140" fill="#bbbbbb" opacity="0.4"/>
+  <rect x="720" y="300" width="40" height="40" fill="#aaaaaa" opacity="0.3" rx="5"/>
+  <circle cx="720" cy="480" r="25" fill="#999999" opacity="0.3"/>
+</svg>

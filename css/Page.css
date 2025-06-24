@@ -1,0 +1,469 @@
+/*畫面文字設定*/
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+body.swal2-height-auto {
+    height: inherit !important;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Noto Sans TC', '微軟正黑體', '標楷體', sans-serif !important;
+}
+body{
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0 24px;
+    background-image: url("../svg/minimal_lightgray_geometric_sides.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    align-content: center;
+}
+
+/* Switch 樣式 */
+
+.bold-text {
+    font-weight: bold;
+}
+
+.form-switch .form-check-input {
+    background-image: url("../svg/red_minus.png") !important;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: url("../svg/plus.png") !important;
+}
+
+/* .form-check-input:checked {
+    background-color: #75fdff;
+    border-color: #75fdff;
+} */
+
+#newtr > td > input:checked[type=checkbox] {
+    background-image: url("../svg/check_default.png") !important;
+    height: 20px;
+    width: 20px;
+}
+
+#newtr > td > input[type=checkbox] {
+    height: 20px;
+    width: 20px;
+}
+
+.Card {
+    color: black;
+    padding: 25px 60px 40px;
+    /* border-radius: 0; */
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: x-large;
+}
+.Cardform {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.Card button:hover {
+    background: #dda0fa;
+}
+.Card button {
+    border: 0;
+    background: #dda0fa;
+    color: black;
+    font-weight: 400;
+    padding: 5px 0px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: x-large;
+}
+.CardIconbutton {
+    width: 180px;
+    padding-top: 20px;
+    padding: 10px 10px !important;
+}
+.CardIconbutton img {
+    width: 100px;
+    height: 100px;
+}
+.Cardtitle {
+    text-align: center;
+    font-weight: 600;
+    font-size: xx-large;
+}
+
+.Card textarea {
+    font-size: large;
+}
+/* 
+.navbar-toggler-icon {
+    background-image: url('../svg/burger.svg');
+}
+/* .navbar-toggler {
+    border: rgb(87, 90, 94) 3px solid;
+} */
+.nav-item {
+    font-size: x-large;
+}
+
+nav a {
+    color: inherit; /* 移除超連結 */
+    text-decoration: none; /* 移除超連結底線 */
+    /* font-weight: 600; */
+}
+nav > ul {
+    list-style: none;   /* 移除項目符號 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+nav > ul {
+    background-color: white;
+    list-style: none;   /* 移除項目符號 */
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    color: inherit; /* 移除超連結顏色 */
+    display: block; /* 讓 <a> 填滿 <li> */
+    font-size: xx-large;
+    padding: 10px;
+    text-decoration: none;  /* 移除超連結底線 */
+}
+/* 滑鼠移到 <a> 時變成深底淺色 */
+nav a:hover {
+    background-color: #bb5dc4;
+    color: white;
+    text-decoration: none;  /* 移除超連結底線 */
+}
+
+.table {
+    align-items: center;
+}
+.table-responsive {
+    font-size: large;
+    max-height: 300px;
+    text-align: center;
+}
+
+.table td, .table th {
+    padding: 5px 10px;
+}
+.table thead tr th {
+    position: sticky;
+    top: 0;
+}
+.table thead tr th:first-child {
+    z-index: 2;
+}
+.btn p {
+    margin-bottom: 0px;
+}
+.btn-lightbluecolor {
+    background-color: #dda0fa;
+    border-color: #dda0fa;
+}
+.btn-lightbluecolor:hover {
+    background-color: #bb5dc4;
+}
+.btn-imgbtnStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 2px solid #ebebeb;
+    font-size: x-large;
+}
+.Swaltable {
+    width: 100%;
+}
+.Swaltable tr{
+    border-bottom: 2px solid black;
+}
+.Swaltable td {
+    padding: 0 10px;
+}
+
+.swal2-popup{
+    width: auto;
+    justify-items: center;
+}
+.swal2-popup .btn {
+    margin: 10px;
+}
+
+.btn img {
+    width: 100px;
+    height: 100px;
+}
+
+.custom-select {
+    height: calc(2.85rem + 2px);
+}
+
+.align-middle td {
+    vertical-align: middle !important;
+}
+
+#swal2-html-container {
+    display: flex !important;
+}
+
+#ReceiptCard .form-check {
+    padding-left: 4rem;
+}
+
+@media (width <= 720px) {
+    .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    body {
+        padding: 0;
+    }
+    body.swal2-height-auto {
+        height: inherit !important;
+    }
+    .navbar-toggler {
+        border: 2px solid gray;
+    }
+    .offcanvas-header {
+        font-size: calc(2.3rem + 1.5vw);
+    }
+    .offcanvas-header p {
+        font-size: calc(2.3rem + 1.5vw) !important;
+    }
+    .offcanvas-body a {
+        font-size: calc(1.8rem + 1.5vw);
+    }
+    .navbar-brand .fs-4 {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .navbar-brand img {
+        width: calc(1.5rem + 2vw) !important;
+        height: calc(1.5rem + 2vw) !important;
+    }
+    .Card {
+        width: 100vw;
+        padding: 25px 20px 40px;
+    }
+    .Card .fs-1 {
+        font-size: calc(3.5rem + 1vw) !important;
+    }
+    .Card .fs-2 {
+        font-size: calc(3rem + 1.375vw) !important;
+    }
+    .Card .fs-3 {
+        font-size: calc(1.8rem + 1.5vw) !important;
+    }
+    .Card .fs-4 {
+        font-size: calc(2rem + 1.5vw) !important;
+    }
+    .Card .fs-5 {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .btn img {
+        width: calc(8rem + 2vw);
+        height: calc(8rem + 2vw);
+    }
+    .form-control {
+        height: calc(2.5rem) !important;
+        font-size: calc(2.5rem + 1.5vw) !important;
+    }
+    .form-control::-webkit-input-placeholder {
+        font-size: calc(2.5rem + 1.5vw) !important;
+    }
+    .table-responsive {
+        font-size: calc(1rem + 1.5vw);
+    }
+    .table-responsive {
+        max-width: 100vw;
+        white-space: nowrap;
+    }
+    .input-group-lg>.input-group-prepend>.input-group-text {
+        height: calc(5.875rem + 2px);
+    }
+    #ReceiptCard .fs-4 {
+        font-size: calc(1.3rem + 1.5vw) !important;
+    }
+    #ReceiptCard .fs-1 {
+        font-size: calc(3rem + 1vw) !important;
+    }
+    .custom-select {
+        height: calc(5.85rem + 2px);
+        font-size: calc(1.5rem + 1.5vw);
+    }
+    /* sweetAlert RWD */
+    .swal2-title {
+        font-size: calc(3rem + 1vw) !important;
+    }
+    .swal2-html-container .fs-5 {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .swal2-html-container .fs-4 {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .swal2-actions button {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .swal2-html-container {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .swal2-html-container > .justify-content-center > .table-responsive {
+        display: inline-table !important;
+        width: 80% !important;   
+    }
+    .swal2-html-container > .justify-content-center > #InsertTable {
+        font-size: calc(2rem + 1.5vw);
+    }
+}
+
+@media (width <= 450px) {
+    body {
+        padding: 0;
+    }
+    body.swal2-height-auto {
+        height: inherit !important;
+    }
+    .offcanvas-header {
+        font-size: calc(1.5rem + 1.5vw);
+    }
+    .offcanvas-header p {
+        font-size: calc(1.5rem + 1.5vw) !important;
+    }
+    .offcanvas-body a {
+        font-size: calc(1rem + 1.5vw);
+    }
+    .navbar-brand .fs-4 {
+        font-size: calc(1rem) !important;
+    }
+    .navbar-brand img {
+        width: calc(1rem + 2vw) !important;
+        height: calc(1rem + 2vw) !important;
+    }
+    .Card {
+        width: 100vw;
+        padding: 25px 10px 25px;
+    }
+    .Cardtitle {
+        margin-top: calc(2.15rem);
+        margin-bottom: 0px;
+    }
+    .Card .fs-1 {
+        font-size: calc(2rem + 1vw) !important;
+    }
+    .Card .fs-2 {
+        font-size: calc(1.5rem + 1.375vw) !important;
+    }
+    .Card .fs-3 {
+        font-size: calc(1rem + 1.735vw) !important;
+    }
+    .Card .fs-4 {
+        font-size: calc(0.8rem + 1.25vw) !important;
+    }
+    .Card .fs-5 {
+        font-size: calc(0.7rem + 1vw) !important;
+    }
+    .btn img {
+        width: calc(5rem + 2vw);
+        height: calc(5rem + 2vw);
+    }
+    .form-control {
+        height: calc(1.2rem + 1vw) !important;
+        font-size: calc(1.3rem) !important;
+    }
+    .form-control::-webkit-input-placeholder {
+        font-size: calc(1rem + 0.5vw) !important;
+    }
+    .table-responsive {
+        font-size: calc(0.9rem);
+    }
+    .table-responsive {
+        max-width: 94vw;
+        white-space: nowrap;
+    }
+    .input-group-lg>.input-group-prepend>.input-group-text {
+        height: calc(3rem);
+    }
+    .input-group-lg>.btn {
+        padding: 0px 1rem !important;
+    }
+    /* 收貨 Page */
+    #ReceiptCard {
+        padding: 25px 10px 5px !important;
+    }
+    #ReceiptCard .fs-4 {
+        font-size: calc(0.8rem + 1vw) !important;
+    }
+    #ReceiptCard .fs-1 {
+        font-size: calc(1.5rem + 1vw) !important;
+    }
+    #ReceiptCard .form-check {
+        padding-left: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    #QRcode {
+        height: calc(0.8rem) !important;
+        font-size: calc(0.8rem) !important;
+    }
+    #ScanedQRcodeTable > tbody td, #ScanedQRcodeTable > thead th {
+        padding: 3px 10px !important;
+    }
+    .custom-select {
+        height: calc(4.5rem + 2px);
+        font-size: calc(1rem + 1vw);
+    }
+    .swal_html_container_btn_area {
+        display: flex;
+        flex-direction: column-reverse !important;
+        flex-wrap: wrap-reverse;
+    }
+    /* sweetAlert RWD */
+    .swal2-title {
+        font-size: calc(1.5rem + 1vw) !important;
+    }
+    .swal2-html-container .fs-5 {
+        font-size: calc(1rem + 1vw) !important;
+    }
+    .swal2-html-container .fs-4 {
+        font-size: calc(1rem + 1.35vw) !important;
+    }
+    .swal2-actions button {
+        font-size: calc(1rem + 1.5vw) !important;
+    }
+    .swal2-html-container {
+        font-size: calc(1rem + 1.5vw) !important;
+    }
+    .swal2-html-container div:first-child {
+        width: 94%;
+    }
+    .swal2-html-container > .justify-content-center > .table-responsive {
+        display: inline-table !important;
+        width: 80% !important;   
+    }
+    .swal2-html-container > .justify-content-center > #InsertTable {
+        font-size: calc(1rem + 1.345vw);
+    }
+    .swal2-html-container #SwalTable {
+        margin-bottom: 0px;
+    }
+    .swal2-html-container table {
+        max-height: 192px;
+    }
+    .swal2-actions {
+        margin: 0 auto 0;
+    }
+}
