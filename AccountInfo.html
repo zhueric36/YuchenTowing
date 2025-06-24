@@ -95,7 +95,11 @@
                     <div class="input-group-prepend">
                         <p class="fs-4 fw-bold input-group-text">公司名稱</p>
                     </div>
-                    <input type="text" class="form-control form-control-lg" id="C_CompanyName" >
+                    <input type="text" list="companyList" class="form-control form-control-lg"  id="C_CompanyName" >
+                        <datalist id="companyList">
+                            <option value="行遍">
+                            <option value="全鋒">
+                        </datalist>
                 </div>
                 <p></p>
                 <div class="input-group input-group-lg">
@@ -151,7 +155,14 @@
                     <div wclass="input-group-prepend">
                         <p class="fs-4 fw-bold input-group-text">人員</p>
                     </div>
-                    <input type="text" class="form-control form-control-lg" id="C_Personnel" >
+                    <input type="text" list="personnelList" class="form-control form-control-lg" id="C_Personnel" >
+                    <datalist id="personnelList">
+                            <option value="軒">
+                            <option value="葦">
+                            <option value="昆">
+                            <option value="忠">
+                            <option value="敏">
+                    </datalist>
                 </div>
                 <p></p>
                 <div style="display: flex; justify-content: space-around; flex-direction: row; width: 80%;">

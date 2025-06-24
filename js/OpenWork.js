@@ -6,7 +6,21 @@ const swalWithBootstrapButtons = Swal.mixin({
     },
     buttonsStyling: false
 });
+const swalLoading = Swal.mixin({
+  customClass: {
+    popup: 'swal2-loading-popup',
+  },
+  allowOutsideClick: false,
+  allowEscapeKey: false,
+  showConfirmButton: false,
+  didOpen: () => {
+    Swal.showLoading();
+  }
+});
+
+
 function goMainPage() {
     sessionStorage.removeItem('WorkFlag');
     window.location.href = 'Home.html';
 }
+

@@ -197,7 +197,20 @@ nav a:hover {
     margin: 10px;
 }
 
+.swal2-loading-popup {
+  font-size: 1.5rem;  /* 適合中文字標題大小 */
+  padding: 2rem;
+  width: 350px !important;
+  height: auto !important;  /* 自動高度會依文字自適應 */
+  text-align: center;
+}
 
+.swal2-loading-popup .swal2-title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  white-space: normal; /* 確保文字能換行 */
+  word-break: break-word;
+}
 
 
 
