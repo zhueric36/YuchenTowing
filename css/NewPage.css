@@ -145,12 +145,9 @@ nav a:hover {
 
 
 
-
 .btn-lightbluecolor:hover {
     background-color: #ce8142;
 }
-
-
 
 
 .btn-imgbtnStyle {
@@ -171,6 +168,14 @@ nav a:hover {
   background-color: #ce8142;
 }
 
+.btn-delete{
+    background-color: #df3e3e;
+    border-color: #df3e3e;
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+
 .form-control {
     width: 100%;
     height: 56px;
@@ -190,7 +195,7 @@ nav a:hover {
 }
 
 .swal2-popup{
-    width: auto;
+    width: 350px !important;
     justify-items: center;
 }
 .swal2-popup .btn {
@@ -210,6 +215,11 @@ nav a:hover {
   font-size: 1.5rem;
   white-space: normal; /* 確保文字能換行 */
   word-break: break-word;
+}
+.swal2-loading-popup .swal2-loader {
+  width: 4rem !important;
+  height: 4rem !important;
+  border-width: 0.5rem !important;
 }
 
 
@@ -380,34 +390,6 @@ nav a:hover {
     }
     .input-group-lg>.btn {
         padding: 0px 1rem !important;
-    }
-    /* 收貨 Page */
-    #ReceiptCard {
-        padding: 25px 10px 5px !important;
-    }
-    #ReceiptCard .fs-4 {
-        font-size: calc(0.8rem + 1vw) !important;
-    }
-    #ReceiptCard .fs-1 {
-        font-size: calc(1.5rem + 1vw) !important;
-    }
-    #ReceiptCard .form-check {
-        padding-left: 4rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-bottom: 5px;
-    }
-    #QRcode {
-        height: calc(0.8rem) !important;
-        font-size: calc(0.8rem) !important;
-    }
-    #ScanedQRcodeTable > tbody td, #ScanedQRcodeTable > thead th {
-        padding: 3px 10px !important;
-    }
-    .custom-select {
-        height: calc(4.5rem + 2px);
-        font-size: calc(1rem + 1vw);
     }
     .swal_html_container_btn_area {
         display: flex;

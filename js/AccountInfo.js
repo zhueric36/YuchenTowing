@@ -75,7 +75,7 @@ function ClearFormFields() {
 }
 
 async function StartCreateAccount(date,time ,companyName, start, destination, money, phone, carType, licenseplate, carNumber, personnel) {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwnbnY04l-0IRWj8P5x_sAtPQ4zCIQdxqAYj2-wpA9ujHiHblPOP7I9LhMHPVRZFAsa/exec";
+    const scriptURL = getScriptURL();
 
     try {
         const response = await fetch(`${scriptURL}?action=insert&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&companyName=${encodeURIComponent(companyName)}&start=${encodeURIComponent(start)}&destination=${encodeURIComponent(destination)}&money=${encodeURIComponent(money)}&phone=${encodeURIComponent(phone)}&carType=${encodeURIComponent(carType)}&licenseplate=${encodeURIComponent(licenseplate)}&carNumber=${encodeURIComponent(carNumber)}&personnel=${encodeURIComponent(personnel)}`);

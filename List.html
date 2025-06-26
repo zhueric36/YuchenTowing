@@ -23,18 +23,16 @@
     <script type="text/javascript" src="http://malsup.github.io/jquery.blockUI.js"></script>
     <!-- sweetAlert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <!-- local file -->
-    <!-- <link href="css/Page.css" rel="stylesheet" type="text/css"> -->
     <link href="css/NewPage.css?v=1.2" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="js/Home.js"></script>
+    <script type="text/javascript" src="js/AccountList.js"></script>
+    <script type="text/javascript" src="js/API.js"></script>
     <script type="text/javascript" src="js/OpenWork.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- RWD -->
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>首頁</title>
+    <title>帳目清單</title>
 </head>
 
 <body>
@@ -67,7 +65,7 @@
                                 <a class="nav-link WorkFlow1" onclick="OpenOutGoods()">查詢管理</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link WorkFlow2" onclick="goListPage()">帳目清單</a>
+                                <a class="nav-link WorkFlow3" onclick="OpenList()">帳目清單</a>
                             </li>
                         </ul>
                     </div>
@@ -75,26 +73,50 @@
             </div>
         </nav>
     </div>
-    <div class="Card" id="Content">
+    <div class="Card" id="AccountListCard">
         <div class="Cardform">
-            <div style="display: flex; justify-content: center; flex-direction: row; margin-bottom: 20px;">
-                <button class="btn btn-primary btn-lightbluecolor btn-imgbtnStyle" onclick=" goCreateAccount()">
-                    <img src="svg/contract.png">
-                    <p class="fs-4 fw-bold" style="margin-bottom: 0px; color: black;">&ensp;建立帳目&ensp;</p>
-                </button>
-                <p style="width: 20px;"></p>
-                <button class="btn btn-primary btn-lightbluecolor btn-imgbtnStyle" onclick="onClick_ReceiptButton()">
-                    <img src="svg/search.png">
-                    <p class="fs-4 fw-bold" style="margin-bottom: 0px; color: black;">&ensp;查詢管理&ensp;</p>
-                </button>
+            <p class="fs-1 fw-bold">帳目清單</p>
+            <div>
+                <table class="table table-responsive" id="AccountList" style="max-height: 50vh;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>日期</th>
+                            <th>時間</th>
+                            <th>公司名稱</th>
+                            <th>出發地</th>
+                            <th>目的地</th>
+                            <th>金額(案件編號)</th>
+                            <th>電話</th>
+                            <th>車款</th>
+                            <th>車牌</th>
+                            <th>出車</th>
+                            <th>人員</th>
+                            <th>操作</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
             </div>
-            <div style="display: flex; justify-content: center; flex-direction: row; margin-bottom: 20px;">
-                <button class="btn btn-primary btn-lightbluecolor btn-imgbtnStyle" onclick="goListPage()">
-                    <img src="svg/list.png">
-                    <p class="fs-4 fw-bold" style="margin-bottom: 0px; color: black;">&ensp;帳目清單&ensp;</p>
-                </button>
+    
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <p class="fs-5 bold-text" style="margin-bottom: 0px; margin-right: 5px;">明細總數：</p>
+                        <p class="fs-5 bold-text" id="TotalCount" style="display: flex; justify-content: center; margin: 3px;"></p>
+                    </div>
+                </div>
+                <p></p>
+                <div style="display: flex; gap: 50px;">
+                    <button class="btn btn-secondary" onclick="close_List()">
+                        <p class="fs-4 fw-bold" style="margin-bottom: 0px;">返回</p>
+                    </button>
+                </div>
             </div>
-               
         </div>
     </div>
 </body>

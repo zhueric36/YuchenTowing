@@ -27,6 +27,7 @@
     <link href="css/Account.css" rel="stylesheet" type="text/css">
     <link href="css/NewPage.css?v=1.2" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/AccountInfo.js"></script>
+    <script type="text/javascript" src="js/API.js"></script>
     <script type="text/javascript" src="js/OpenWork.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- RWD -->
@@ -59,13 +60,13 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
                                 <a class="nav-link WorkFlow0 active" aria-current="page"
-                                    onclick="OpenReceiveWork()">建立帳目</a>
+                                    onclick="goCreateAccount()">建立帳目</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link WorkFlow1" onclick="OpenOutGoods()">查詢管理</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link WorkFlow3" onclick="OpenReservedWork()">帳目清單</a>
+                                <a class="nav-link WorkFlow3" onclick="goListPage()">帳目清單</a>
                             </li>
                         </ul>
                     </div>

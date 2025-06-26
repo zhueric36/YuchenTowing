@@ -20,7 +20,18 @@ const swalLoading = Swal.mixin({
 
 
 function goMainPage() {
-    sessionStorage.removeItem('WorkFlag');
     window.location.href = 'Home.html';
+}
+
+function goListPage() {
+    window.location.href = 'List.html';
+    document.getElementById('AccountListCard').style.display = 'block';
+   
+}
+
+function goCreateAccount() {
+    window.location.href = 'AccountInfo.html';
+    document.getElementById('CreateAccountCard').style.display = 'block';
+
 }
 
