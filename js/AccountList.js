@@ -2,6 +2,9 @@ window.onload = function() {
   AccountList();
 };
 
+let personnelData = []; // 存所有資料
+let currentPage = 1;
+const pageSize = 10;
 function AccountList(){
     const scriptURL = getScriptURL();
 
@@ -20,7 +23,6 @@ function AccountList(){
                 const converted = convertISOToLocalDateTime(row[0], row[1]); // 假設 row[0] 是日期、row[1] 是時間
                 row[0] = converted.日期;
                 row[1] = converted.時間;
-
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td>${index}</td>
@@ -35,6 +37,7 @@ function AccountList(){
                     <td>${row[8]}</td>
                     <td>${row[9]}</td>
                     <td>${row[10]}</td>
+                    <td>${row[11]}</td>
                     <td><button class="btn btn-danger" onclick="Delete(${index})">刪除</button></td>
                 `;
                 tbody.appendChild(tr);

@@ -24,8 +24,8 @@ function goMainPage() {
 }
 
 function goListPage() {
+    // document.getElementById('AccountListCard').style.display = 'block';
     window.location.href = 'List.html';
-    document.getElementById('AccountListCard').style.display = 'block';
    
 }
 
@@ -34,4 +34,9 @@ function goCreateAccount() {
     document.getElementById('CreateAccountCard').style.display = 'block';
 
 }
+
+function goSearchPage() {
+    window.location.href = 'Search.html';
+}
+
 

@@ -21,6 +21,6 @@
     // window.onload = loadData;
 
 function getScriptURL(){
-  const scriptURL = "https://script.google.com/macros/s/AKfycby5kZk1CeUQ1-oxC_OIB-vLBFzSVA1MpoCUiC1-6QvoGibibqdjjpS5OJQCIQGWnaY/exec"; // 替換為你的 Web App 網址
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwy9gEeh8cSS2fPijPRDyC9Riw5b9z3A6WDIRlxDAxI-Kd2msj4ZaZkI2K82dxY1ERq/exec"; // 替換為你的 Web App 網址
   return scriptURL
 }

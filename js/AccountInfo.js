@@ -11,6 +11,7 @@ function CancelCreateAccount() {
     document.getElementById('C_CompanyName').value = '';
     document.getElementById('C_Start').value = '';
     document.getElementById('C_Destination').value = '';
+    document.getElementById('C_CaseNumber').value = '';
     document.getElementById('C_Money').value = '';
     document.getElementById('C_Phone').value = '';
     document.getElementById('C_CarType').value = '';
@@ -27,6 +28,7 @@ async function ConfirmAccount() {
     const companyName = $('#C_CompanyName').val();
     const start = $('#C_Start').val();
     const destination = $('#C_Destination').val();
+    const caseNumber = $('#C_CaseNumber').val();
     const money = $('#C_Money').val();
     const phone = $('#C_Phone').val();
     const carType = $('#C_CarType').val();
@@ -34,7 +36,12 @@ async function ConfirmAccount() {
     const carNumber = $('#C_CarNumber').val();
     const personnel = $('#C_Personnel').val();
     localStorage.setItem('C_CompanyName', companyName);
-    if (!date || !time || !companyName || !start || !destination || !money || !phone || !carType || !licenseplate || !carNumber || !personnel) {
+    if (/^\d{9}$/.test(phone)) {
+    phone = "0" + phone;
+    }
+// 再把 phone 用 fetch/post 傳送給後端
+
+    if (!date || !time || !companyName || !start || !destination | !caseNumber || !money || !phone || !carType || !licenseplate || !carNumber || !personnel) {
         swalWithBootstrapButtons.fire({
             icon: 'warning',
             title: '欄位不可為空',
@@ -45,7 +52,7 @@ async function ConfirmAccount() {
         title:"執行中請稍後....."
     });
 
-    const data = await StartCreateAccount(date,time,companyName, start, destination, money, phone, carType, licenseplate, carNumber, personnel);
+    const data = await StartCreateAccount(date,time,companyName, start, destination,caseNumber, money, phone, carType, licenseplate, carNumber, personnel);
 
     if (data && data.state) {
         swalWithBootstrapButtons.fire({
@@ -70,15 +77,15 @@ async function ConfirmAccount() {
 }
 
 function ClearFormFields() {
-    const fields = ['C_Date', 'C_CompanyName', 'C_Time', 'C_Start', 'C_Destination', 'C_Money', 'C_Phone', 'C_CarType', 'C_licenseplate', 'C_CarNumber', 'C_Personnel'];
+    const fields = ['C_Date', 'C_CompanyName', 'C_Time', 'C_Start', 'C_Destination','C_CaseNumber', 'C_Money', 'C_Phone', 'C_CarType', 'C_licenseplate', 'C_CarNumber', 'C_Personnel'];
     fields.forEach(id => document.getElementById(id).value = '');
 }
 
-async function StartCreateAccount(date,time ,companyName, start, destination, money, phone, carType, licenseplate, carNumber, personnel) {
+async function StartCreateAccount(date,time ,companyName, start, destination, caseNumber,money, phone, carType, licenseplate, carNumber, personnel) {
     const scriptURL = getScriptURL();
 
     try {
-        const response = await fetch(`${scriptURL}?action=insert&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&companyName=${encodeURIComponent(companyName)}&start=${encodeURIComponent(start)}&destination=${encodeURIComponent(destination)}&money=${encodeURIComponent(money)}&phone=${encodeURIComponent(phone)}&carType=${encodeURIComponent(carType)}&licenseplate=${encodeURIComponent(licenseplate)}&carNumber=${encodeURIComponent(carNumber)}&personnel=${encodeURIComponent(personnel)}`);
+        const response = await fetch(`${scriptURL}?action=insert&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&companyName=${encodeURIComponent(companyName)}&start=${encodeURIComponent(start)}&destination=${encodeURIComponent(destination)}&caseNumber=${encodeURIComponent(caseNumber)}&money=${encodeURIComponent(money)}&phone=${encodeURIComponent(phone)}&carType=${encodeURIComponent(carType)}&licenseplate=${encodeURIComponent(licenseplate)}&carNumber=${encodeURIComponent(carNumber)}&personnel=${encodeURIComponent(personnel)}`);
         const text = await response.text();
         return JSON.parse(text);
     } catch (error) {
