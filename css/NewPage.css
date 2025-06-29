@@ -184,6 +184,14 @@ nav a:hover {
     border: 2px solid #ebebeb;
     font-size: x-large;
 }
+#pagination input[type=number] {
+    min-width: 60px;
+    width: 70px !important;
+    max-width: 100px;
+    display: inline-block;
+}
+
+
 .Swaltable {
     width: 100%;
 }

@@ -39,4 +39,127 @@ function goSearchPage() {
     window.location.href = 'Search.html';
 }
 
+function renderTableWithPagination(data, tableBodySelector, paginationId, rowsPerPage, renderRowFunction) {
+    const totalPages = Math.ceil(data.length / rowsPerPage) || 1; // 保底至少 1 頁
+    let currentPage = 1;
+
+    function displayPage(page) {
+        const tbody = document.querySelector(tableBodySelector);
+        if (!tbody) return;
+
+        tbody.innerHTML = ''; // 清空表格
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageData = data.slice(start, end);
+
+        pageData.forEach((row, index) => {
+            renderRowFunction(row, start + index + 1, tbody);
+        });
+
+        renderCustomPagination(paginationId, totalPages, page, newPage => {
+            currentPage = newPage;
+            displayPage(currentPage);
+        });
+    }
+
+    displayPage(currentPage);
+}
+
+
+function renderCustomPagination(paginationId, totalPages, currentPage, onPageChange) {
+    const container = document.getElementById(paginationId);
+    if (!container) return;
+
+    container.innerHTML = ''; // 清除舊的分頁按鈕
+
+    const createButton = (text, disabled, onClick) => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        btn.disabled = disabled;
+        btn.className = disabled ? 'btn btn-secondary' : 'btn btn-outline-secondary';
+        btn.style.margin = '0 4px';
+        if (!disabled) {
+            btn.addEventListener('click', onClick);
+        }
+        return btn;
+    };
+
+    container.appendChild(createButton('上一頁', currentPage === 1, () => onPageChange(currentPage - 1)));
+    
+    const pageDisplay = document.createElement('span');
+    pageDisplay.innerHTML = `&nbsp;${currentPage}&nbsp;/&nbsp;${totalPages}&nbsp;`;
+    container.appendChild(pageDisplay);
+
+    container.appendChild(createButton('下一頁', currentPage === totalPages, () => onPageChange(currentPage + 1)));
+    container.appendChild(createButton('最後一頁', currentPage === totalPages, () => onPageChange(totalPages)));
+}
+
+// function renderPagination(containerId, totalPages, onPageChange) {
+//     let currentPage = 1;
+//     const container = document.getElementById(containerId);
+//     container.innerHTML = "";
+
+//     const btnPrev = document.createElement("button");
+//     btnPrev.innerText = "上一頁";
+//     btnPrev.onclick = () => {
+//         if (currentPage > 1) {
+//             currentPage--;
+//             update();
+//         }
+//     };
+
+//     const input = document.createElement("input");
+//     input.type = "number";
+//     input.min = 1;
+//     input.max = totalPages;
+//     input.value = currentPage;
+//     input.style.width = "50px";
+//     input.style.textAlign = "center";
+
+//     input.addEventListener("change", () => {
+//         const val = parseInt(input.value);
+//         if (!isNaN(val) && val >= 1 && val <= totalPages) {
+//             currentPage = val;
+//             update();
+//         } else {
+//             input.value = currentPage; // 還原
+//         }
+//     });
+
+//     const pageTotal = document.createElement("span");
+//     pageTotal.innerText = ` / ${totalPages}`;
+
+//     const btnNext = document.createElement("button");
+//     btnNext.innerText = "下一頁";
+//     btnNext.onclick = () => {
+//         if (currentPage < totalPages) {
+//             currentPage++;
+//             update();
+//         }
+//     };
+
+//     const btnLast = document.createElement("button");
+//     btnLast.innerText = "最後一頁";
+//     btnLast.onclick = () => {
+//         currentPage = totalPages;
+//         update();
+//     };
+
+//     container.appendChild(btnPrev);
+//     container.appendChild(input);
+//     container.appendChild(pageTotal);
+//     container.appendChild(btnNext);
+//     container.appendChild(btnLast);
+
+//     function update() {
+//         input.value = currentPage;
+//         onPageChange(currentPage); // 呼叫回調
+//     }
+
+//     update(); // 初始化
+// }
+
+
+
+
 

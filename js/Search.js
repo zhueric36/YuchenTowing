@@ -170,14 +170,16 @@ function SearchPersonnelName() {
    
 }
 function fetchAndRenderData({ 
-    
     apiAction, 
     queryParamName, 
     queryValue, 
     hideCardId, 
     showTableId, 
     tableBodySelector, 
-    totalCountId 
+    totalCountId,
+    paginationId,              // ← 新增參數：分頁用的容器 ID
+    renderRowFunction,         // ← 新增參數：分頁時每列怎麼渲染
+    rowsPerPage = 10           // ← 可選：每頁筆數，預設 10
 }) {
     if (!queryValue) {
         swalWithBootstrapButtons.fire({
@@ -186,6 +188,7 @@ function fetchAndRenderData({
         });
         return;
     }
+
     document.querySelector(tableBodySelector).innerHTML = '';
     const scriptURL = getScriptURL();
     const finalURL = `${scriptURL}?action=${apiAction}&${queryParamName}=${encodeURIComponent(queryValue)}`;
@@ -198,10 +201,6 @@ function fetchAndRenderData({
     fetch(finalURL)
         .then(res => res.json())
         .then(data => {
-            const tbody = document.querySelector(tableBodySelector);
-            tbody.innerHTML = "";
-
-            // 👉 查無資料時的處理
             if (!data || data.length <= 1) {
                 swalLoading.close();
                 swalWithBootstrapButtons.fire({
@@ -210,32 +209,15 @@ function fetchAndRenderData({
                     text: '請確認輸入的查詢條件是否正確',
                 });
 
-                // 隱藏表格區塊（你可以依需求保留或刪掉這行）
-                
                 document.getElementById(showTableId).style.display = 'none';
                 document.getElementById(hideCardId).style.display = 'block';
+                document.getElementById(paginationId).innerHTML = '';
                 return;
             }
 
-            data.forEach((row, index) => {
-                if (index === 0) return; // skip headers
-                const converted = convertISOToLocalDateTime(row[0], row[1]);
-                row[0] = converted.日期;
-                row[1] = converted.時間;
-
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${index}</td>
-                    ${row.map((col, i) => {
-                        if (i === row.length - 1) return ""; 
-                        return `<td>${col}</td>`;
-                    }).join('')}
-                `;
-
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById(totalCountId).innerText = data.length - 1;
+            const tableData = data.slice(1); // 移除標題列
+            renderTableWithPagination(tableData, tableBodySelector, paginationId, rowsPerPage, renderRowFunction);
+            document.getElementById(totalCountId).innerText = tableData.length;
             swalLoading.close();
         })
         .catch(error => {
@@ -248,6 +230,21 @@ function fetchAndRenderData({
             });
         });
 }
+
+function renderGenericRow(row, index, tbody) {
+    const converted = convertISOToLocalDateTime(row[0], row[1]);
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${index}</td>
+        <td>${converted.日期}</td>
+        <td>${converted.時間}</td>
+        ${row.slice(2, row.length - 1).map(col => `<td>${col}</td>`).join('')}
+    `;
+    tbody.appendChild(tr);
+}
+
+
 
 
 
@@ -262,7 +259,10 @@ function SearchCase(CaseNumber) {
         hideCardId: 'CaseNumberCard',
         showTableId: 'CaseTable',
         tableBodySelector: '#CasenumberTable tbody',
-        totalCountId: 'CaseTotalCount'
+        totalCountId: 'CaseTotalCount',
+        paginationId: "pagination-case",
+        renderRowFunction: renderGenericRow,
+        rowsPerPage: 10
     });
 }
 
@@ -277,7 +277,10 @@ function SearchCompany(CompanyName) {
         hideCardId: 'CompanyCard',
         showTableId: 'CompanyTable',
         tableBodySelector: '#CompanyNameTable tbody',
-        totalCountId: 'CompanyTotalCount'
+        totalCountId: 'CompanyTotalCount',
+        paginationId: "pagination-company",
+        renderRowFunction: renderGenericRow,
+        rowsPerPage: 10
     });
 }
 //出車
@@ -345,7 +348,10 @@ function SearchCaseDate(sheetDate) {
         hideCardId: 'DateCard',
         showTableId: 'DateTable',
         tableBodySelector: '#DateCaseTable tbody',
-        totalCountId: 'DateCaseTotalCount'
+        totalCountId: 'DateCaseTotalCount',
+        paginationId: "pagination-date",
+        renderRowFunction: renderGenericRow,
+        rowsPerPage: 10
     });
 }
 
@@ -359,7 +365,10 @@ function SerachPersonnel(PersonnelName) {
         hideCardId: 'PersonnelCard',
         showTableId: 'PersonnelTable',
         tableBodySelector: '#PersonnelTable tbody',
-        totalCountId: 'PersonnelTotalCount'
+        totalCountId: 'PersonnelTotalCount',
+        paginationId: "pagination-personnel",
+        renderRowFunction: renderGenericRow,
+        rowsPerPage: 10
     });
 }
 
@@ -380,19 +389,83 @@ function convertISOToLocalDateTime(isoDateStr, isoTimeStr) {
     return { 日期: dateStr, 時間: timeStr };
 }
 
-async function Cfirmed_Delete(index){
-    const scriptURL = getScriptURL();
-     try {
-        const response = await fetch(`${scriptURL}?action=delete&index=${encodeURIComponent(index)}`);
-        const text = await response.text();
-        return JSON.parse(text);
-    } catch (error) {
-        swalWithBootstrapButtons.fire({
-            icon: 'error',
-            title: '連線錯誤',
-            text: error.message || '無法連接到後端',
-        });
-        return { state: false };
-    }
 
-}
+// function fetchAndRenderData({ 
+    
+//     apiAction, 
+//     queryParamName, 
+//     queryValue, 
+//     hideCardId, 
+//     showTableId, 
+//     tableBodySelector, 
+//     totalCountId 
+// }) {
+//     if (!queryValue) {
+//         swalWithBootstrapButtons.fire({
+//             icon: 'warning',
+//             title: '欄位不可為空',
+//         });
+//         return;
+//     }
+//     document.querySelector(tableBodySelector).innerHTML = '';
+//     const scriptURL = getScriptURL();
+//     const finalURL = ${scriptURL}?action=${apiAction}&${queryParamName}=${encodeURIComponent(queryValue)};
+
+//     document.getElementById(hideCardId).style.display = 'none';
+//     document.getElementById(showTableId).style.display = 'block';
+
+//     swalLoading.fire({ title: "執行中請稍後....." });
+
+//     fetch(finalURL)
+//         .then(res => res.json())
+//         .then(data => {
+//             const tbody = document.querySelector(tableBodySelector);
+//             tbody.innerHTML = "";
+
+//             // 👉 查無資料時的處理
+//             if (!data || data.length <= 1) {
+//                 swalLoading.close();
+//                 swalWithBootstrapButtons.fire({
+//                     icon: 'info',
+//                     title: '查無資料',
+//                     text: '請確認輸入的查詢條件是否正確',
+//                 });
+
+//                 // 隱藏表格區塊（你可以依需求保留或刪掉這行）
+                
+//                 document.getElementById(showTableId).style.display = 'none';
+//                 document.getElementById(hideCardId).style.display = 'block';
+//                 return;
+//             }
+
+//             data.forEach((row, index) => {
+//                 if (index === 0) return; // skip headers
+//                 const converted = convertISOToLocalDateTime(row[0], row[1]);
+//                 row[0] = converted.日期;
+//                 row[1] = converted.時間;
+
+//                 const tr = document.createElement("tr");
+//                 tr.innerHTML = 
+//                     <td>${index}</td>
+//                     ${row.map((col, i) => {
+//                         if (i === row.length - 1) return ""; 
+//                         return <td>${col}</td>;
+//                     }).join('')}
+//                 ;
+
+//                 tbody.appendChild(tr);
+//             });
+
+//             document.getElementById(totalCountId).innerText = data.length - 1;
+//             swalLoading.close();
+//         })
+//         .catch(error => {
+//             console.error("載入資料錯誤：", error);
+//             swalLoading.close();
+//             swalWithBootstrapButtons.fire({
+//                 icon: 'error',
+//                 title: '載入錯誤',
+//                 text: '請稍後再試或聯絡系統管理員'
+//             });
+//         });
+// }

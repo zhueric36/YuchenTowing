@@ -2,48 +2,21 @@ window.onload = function() {
   AccountList();
 };
 
-let personnelData = []; // 存所有資料
-let currentPage = 1;
-const pageSize = 10;
-function AccountList(){
+// let personnelData = []; // 存所有資料
+// let currentPage = 1;
+// const pageSize = 10;
+function AccountList() {
     const scriptURL = getScriptURL();
 
-    swalLoading.fire({ 
-        title:"執行中請稍後....."
-    });
+    swalLoading.fire({ title: "執行中請稍後....." });
 
     fetch(`${scriptURL}?action=read`)
         .then(response => response.json())
         .then(data => {
-            const tbody = document.querySelector("#AccountList tbody");
-            tbody.innerHTML = ""; // 清空表格
-
-            data.forEach((row, index) => {
-                if (index === 0) return; // 跳過標頭
-                const converted = convertISOToLocalDateTime(row[0], row[1]); // 假設 row[0] 是日期、row[1] 是時間
-                row[0] = converted.日期;
-                row[1] = converted.時間;
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${index}</td>
-                    <td>${row[0]}</td>  
-                    <td>${row[1]}</td> 
-                    <td>${row[2]}</td>
-                    <td>${row[3]}</td>
-                    <td>${row[4]}</td>
-                    <td>${row[5]}</td>
-                    <td>${row[6]}</td>
-                    <td>${row[7]}</td>
-                    <td>${row[8]}</td>
-                    <td>${row[9]}</td>
-                    <td>${row[10]}</td>
-                    <td>${row[11]}</td>
-                    <td><button class="btn btn-danger" onclick="Delete(${index})">刪除</button></td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById("TotalCount").innerText = data.length - 1;
+            const tableData = data.slice(1); // 移除標頭
+            renderTableWithPagination(tableData, "#AccountList tbody", "pagination-list", 10, renderAccountRow);
+            document.getElementById("TotalCount").innerText = tableData.length;
+            
             swalLoading.close();
         })
         .catch(error => {
@@ -51,6 +24,28 @@ function AccountList(){
             swalLoading.close();
         });
 }
+
+function renderAccountRow(row, index, tbody) {
+    if (index === 0) return;
+
+    const tr = document.createElement("tr");
+
+    // 轉換時間（只在顯示時處理，不修改原始資料）
+    const converted = convertISOToLocalDateTime(row[0], row[1]);
+
+    tr.innerHTML = `
+        <td>${index}</td>
+        <td>${converted.日期}</td>
+        <td>${converted.時間}</td>
+        ${row.slice(2, row.length - 1).map(col => `<td>${col}</td>`).join('')}
+        <td><button class="btn btn-danger" onclick="Delete(${index})">刪除</button></td>
+    `;
+
+    tbody.appendChild(tr);
+}
+
+
+
 
 function convertISOToLocalDateTime(isoDateStr, isoTimeStr) {
     const date = new Date(isoDateStr);
@@ -88,6 +83,8 @@ async function Cfirmed_Delete(index){
 
 function close_List() {
     document.getElementById('AccountListCard').style.display = 'none';
+    // document.querySelector(tableBodySelector).innerHTML = '';
+    // document.getElementById(paginationId).innerHTML = '';
     goMainPage();
 }
 
