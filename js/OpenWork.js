@@ -85,14 +85,36 @@ function renderCustomPagination(paginationId, totalPages, currentPage, onPageCha
     };
 
     container.appendChild(createButton('上一頁', currentPage === 1, () => onPageChange(currentPage - 1)));
-    
-    const pageDisplay = document.createElement('span');
-    pageDisplay.innerHTML = `&nbsp;${currentPage}&nbsp;/&nbsp;${totalPages}&nbsp;`;
-    container.appendChild(pageDisplay);
+
+    // ➕ 加入頁碼輸入框
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.min = 1;
+    input.max = totalPages;
+    input.value = currentPage;
+    input.style.width = '50px';
+    input.style.margin = '0 4px';
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            let page = parseInt(input.value, 10);
+            if (!isNaN(page) && page >= 1 && page <= totalPages) {
+                onPageChange(page);
+            } else {
+                input.value = currentPage; // 無效輸入回復原頁
+            }
+        }
+    });
+
+    const slashSpan = document.createElement('span');
+    slashSpan.innerHTML = `&nbsp;/&nbsp;${totalPages}&nbsp;`;
+
+    container.appendChild(input);
+    container.appendChild(slashSpan);
 
     container.appendChild(createButton('下一頁', currentPage === totalPages, () => onPageChange(currentPage + 1)));
     container.appendChild(createButton('最後一頁', currentPage === totalPages, () => onPageChange(totalPages)));
 }
+
 
 // function renderPagination(containerId, totalPages, onPageChange) {
 //     let currentPage = 1;
